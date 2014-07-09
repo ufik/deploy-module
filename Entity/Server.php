@@ -108,25 +108,25 @@ class Server extends Entity
     }
 
     /**
-     * Gets the value of permissions.
+     * Gets the value of applications.
      *
      * @return mixed
      */
-    public function getPermissions()
+    public function getApplications()
     {
-        return $this->permissions;
+        return $this->applications;
     }
 
     /**
-     * Sets the value of permissions.
+     * Sets the value of applications.
      *
-     * @param mixed $permissions the permissions
+     * @param mixed $applications the applications
      *
      * @return self
      */
-    public function setPermissions($permissions)
+    public function setApplications($applications)
     {
-        $this->permissions = $permissions;
+        $this->applications = $applications;
 
         return $this;
     }
