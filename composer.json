@@ -1,0 +1,27 @@
+{
+    "name": "webcms2/deploy-module",
+    "type": "library",
+    "description": "Module for deploying from development server to production servers.",
+    "keywords": ["webcms2","module"],
+    "homepage": "http://www.webcook.cz/WebCMS2",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomas Voslar",
+            "email": "tomas.voslar@webcook.cz",
+            "homepage": "http://www.webcook.cz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+		"webcms2/webcms2": "~0.4"
+    },
+    "autoload": {
+        "classmap": ["/"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
