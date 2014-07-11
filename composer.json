@@ -5,6 +5,8 @@
     "keywords": ["webcms2","module"],
     "homepage": "http://www.webcook.cz/WebCMS2",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Tomas Voslar",
@@ -16,8 +18,11 @@
     "require": {
 		"webcms2/webcms2": "~0.4"
     },
+    "require-dev": {
+      "webcms2/webcms2": "~0.6"  
+    },
     "autoload": {
-        "classmap": ["/"]
+        "classmap": ["./src", "./tests"]
     },
     "extra": {
         "branch-alias": {

@@ -33,7 +33,7 @@ class Application extends \WebCMS\Entity\Entity
     /**
      * @orm\ManyToMany(targetEntity="Server", cascade={"persist"})
      * @orm\JoinColumn(name="server_id", referencedColumnName="id", onDelete="CASCADE")
-     * @var \Doctrine\Common\Collections\ArrayCollection\ArrayCollection
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     private $servers;
 
@@ -42,7 +42,7 @@ class Application extends \WebCMS\Entity\Entity
      */
     public function __construct()
     {
-        $this->servers = new \Doctrine\Common\Collections\ArrayCollection\ArrayCollection();
+        $this->servers = new \Doctrine\Common\Collections\ArrayCollection;
     }
 
     /**
