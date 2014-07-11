@@ -136,18 +136,4 @@ class Application extends \WebCMS\Entity\Entity
     {
         return $this->servers;
     }
-
-    /**
-     * Sets the value of servers.
-     *
-     * @param mixed $servers the servers
-     *
-     * @return self
-     */
-    public function setServers($servers)
-    {
-        $this->servers = $servers;
-
-        return $this;
-    }
 }
