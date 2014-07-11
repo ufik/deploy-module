@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Description of Application entity.
+ * 
  * @ORM\Entity
  * @author Tomáš Voslař <tomas.voslar at webcook.cz>
  */
@@ -32,8 +33,27 @@ class Application extends Entity
     /**
      * @orm\ManyToMany(targetEntity="Server", cascade={"persist"})
      * @orm\JoinColumn(name="server_id", referencedColumnName="id", onDelete="CASCADE")
+     * @var \Doctrine\Common\Collections\ArrayCollection\ArrayCollection
      */
     private $servers;
+
+    /**
+     * Constructor method, initialize empty servers collection.
+     */
+    public function __construct()
+    {
+        $this->servers = new \Doctrine\Common\Collections\ArrayCollection\ArrayCollection();
+    }
+
+    /**
+     * Add server into array collection.
+     * 
+     * @param Server $server Server object to insert.
+     */
+    public function addServer($server)
+    {
+        $this->servers->add($server);
+    }
 
     /**
      * Gets the value of name.
