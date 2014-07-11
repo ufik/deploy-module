@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @author Tomáš Voslař <tomas.voslar at webcook.cz>
  */
-class Server extends Entity
+class Server extends \WebCMS\Entity\Entity
 {
     /**
      * @ORM\Column(unique=true)
