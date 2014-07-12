@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Description of Server entity.
+ * 
  * @ORM\Entity
  * @author Tomáš Voslař <tomas.voslar at webcook.cz>
  */
@@ -30,11 +31,13 @@ class Server extends \WebCMS\Entity\Entity
     private $path;
 
     /**
-     * @orm\ManyToMany(targetEntity="Application", cascade={"persist"})
-     * @orm\JoinColumn(name="application_id", referencedColumnName="id", onDelete="CASCADE")
+     * @orm\OneToMany(targetEntity="Application", mappedBy="server")
      */
     private $applications;
 
+    /**
+     * [__construct description]
+     */
     public function __construct()
     {
         $this->applications = new \Doctrine\Common\Collections\ArrayCollection;
@@ -47,6 +50,7 @@ class Server extends \WebCMS\Entity\Entity
      */
     public function addApplication(Application $application)
     {
+        $application->setServer($this);
         $this->applications->add($application);
     }
 

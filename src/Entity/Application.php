@@ -31,29 +31,11 @@ class Application extends \WebCMS\Entity\Entity
     private $databaseName;
 
     /**
-     * @orm\ManyToMany(targetEntity="Server", cascade={"persist"})
-     * @orm\JoinColumn(name="server_id", referencedColumnName="id", onDelete="CASCADE")
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @orm\ManyToOne(targetEntity="Server", inversedBy="applications")
+     * @orm\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
+     * @var Server
      */
-    private $servers;
-
-    /**
-     * Constructor method, initialize empty servers collection.
-     */
-    public function __construct()
-    {
-        $this->servers = new \Doctrine\Common\Collections\ArrayCollection;
-    }
-
-    /**
-     * Add server into array collection.
-     * 
-     * @param Server $server Server object to insert.
-     */
-    public function addServer($server)
-    {
-        $this->servers->add($server);
-    }
+    private $server;
 
     /**
      * Gets the value of name.
@@ -130,10 +112,25 @@ class Application extends \WebCMS\Entity\Entity
     /**
      * Gets the value of servers.
      *
-     * @return mixed
+     * @return Server
      */
-    public function getServers()
+    public function getServer()
     {
-        return $this->servers;
+        return $this->server;
+    }
+
+
+    /**
+     * Sets the value of server.
+     *
+     * @param Server $server the server
+     *
+     * @return Server
+     */
+    public function setServer(Server $server)
+    {
+        $this->server = $server;
+
+        return $this;
     }
 }
