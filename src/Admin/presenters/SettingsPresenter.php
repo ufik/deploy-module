@@ -18,11 +18,6 @@ class SettingsPresenter extends BasePresenter
 		parent::beforeRender();	
     }
 	
-    public function actionDefault($idPage)
-    {
-
-    }
-	
     public function createComponentSettingsForm()
     {
 		$settings = array();

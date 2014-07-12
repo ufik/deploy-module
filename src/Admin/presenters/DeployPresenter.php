@@ -19,11 +19,6 @@ class DeployPresenter extends BasePresenter
 	   parent::beforeRender();
     }
 
-    public function actionDefault($idPage)
-    {
-
-    }
-
     public function renderDefault($idPage)
     {
     	$this->reloadContent();
