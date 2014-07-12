@@ -14,3 +14,4 @@ before_script:
   
 script:
   - ./runTests.sh
+  - phpunit --no-globals-backup tests/

@@ -7,8 +7,6 @@ mkdir vendor/webcms2/webcms2/tests/log
 
 fi
 
-phpunit --no-globals-backup tests/
-
 if [ "$1" = "" ]; then
     exit 0
 fi
