@@ -14,6 +14,6 @@ fi
 rm -r report
 phpunit --coverage-clover=coverage.clover tests/
 wget https://scrutinizer-ci.com/ocular.phar
-/usr/bin/php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 exit 0
