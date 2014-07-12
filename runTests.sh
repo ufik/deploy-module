@@ -12,6 +12,8 @@ if [ "$1" = "" ]; then
 fi
 
 rm -r report
-phpunit --no-globals-backup --coverage-html ./report tests/
+phpunit --coverage-clover=coverage.clover tests/
+wget https://scrutinizer-ci.com/ocular.phar
+/usr/bin/php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 exit 0

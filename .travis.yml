@@ -13,5 +13,5 @@ before_script:
   - composer install
   
 script:
-  - ./runTests.sh
-  - phpunit --no-globals-backup tests/
+  - ./runTests.sh cov
+  - phpunit tests
