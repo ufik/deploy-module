@@ -28,12 +28,17 @@ class Deploy extends \WebCMS\Module
     protected $presenters = array(
 		array(
 		    'name' => 'Deploy',
-		    'frontend' => TRUE,
-		    'parameters' => FALSE
+		    'frontend' => false,
+		    'parameters' => false
 		),
+        array(
+            'name' => 'Servers',
+            'frontend' => false,
+            'parameters' => false
+        ),
 		array(
 		    'name' => 'Settings',
-		    'frontend' => FALSE
+		    'frontend' => false
 		)
     );
 

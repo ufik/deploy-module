@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Application extends \WebCMS\Entity\Entity
 {
     /**
-     * @ORM\Column(unique=true)
+     * @ORM\Column(name="`name`",unique=true)
      * @var string
      */
     private $name;
@@ -22,20 +22,24 @@ class Application extends \WebCMS\Entity\Entity
      * @ORM\Column()
      * @var string
      */
-    private $pathName;
+    private $path;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(name="`database`")
      * @var string
      */
-    private $databaseName;
+    private $database;
 
     /**
-     * @orm\ManyToOne(targetEntity="Server", inversedBy="applications")
-     * @orm\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
-     * @var Server
+     * @orm\ManyToMany(targetEntity="Server", mappedBy="applications")
+     * @var \Doctrine\Common\Collections\ArrayCollection<Server>
      */
-    private $server;
+    private $servers;
+
+    public function __construct()
+    {
+        $this->servers = new \Doctrine\Common\Collections\ArrayCollection;
+    }
 
     /**
      * Gets the value of name.
@@ -62,49 +66,49 @@ class Application extends \WebCMS\Entity\Entity
     }
 
     /**
-     * Gets the value of pathName.
+     * Gets the value of Path.
      *
      * @return string
      */
-    public function getPathName()
+    public function getPath()
     {
-        return $this->pathName;
+        return $this->path;
     }
 
     /**
-     * Sets the value of pathName.
+     * Sets the value of Path.
      *
-     * @param string $pathName the path name
+     * @param string $path the path name
      *
      * @return self
      */
-    public function setPathName($pathName)
+    public function setPath($path)
     {
-        $this->pathName = $pathName;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Gets the value of databaseName.
+     * Gets the value of Database.
      *
      * @return string
      */
-    public function getDatabaseName()
+    public function getDatabase()
     {
-        return $this->databaseName;
+        return $this->database;
     }
 
     /**
-     * Sets the value of databaseName.
+     * Sets the value of Database.
      *
-     * @param string $databaseName the database name
+     * @param string $database the database name
      *
      * @return self
      */
-    public function setDatabaseName($databaseName)
+    public function setDatabase($database)
     {
-        $this->databaseName = $databaseName;
+        $this->database = $database;
 
         return $this;
     }
@@ -114,9 +118,9 @@ class Application extends \WebCMS\Entity\Entity
      *
      * @return Server
      */
-    public function getServer()
+    public function getServers()
     {
-        return $this->server;
+        return $this->servers;
     }
 
 
@@ -125,12 +129,10 @@ class Application extends \WebCMS\Entity\Entity
      *
      * @param Server $server the server
      *
-     * @return Server
+     * @return void
      */
-    public function setServer(Server $server)
+    public function addServer(Server $server)
     {
-        $this->server = $server;
-
-        return $this;
+        $this->servers->add($server);
     }
 }

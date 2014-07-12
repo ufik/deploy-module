@@ -31,7 +31,7 @@ class Server extends \WebCMS\Entity\Entity
     private $path;
 
     /**
-     * @orm\OneToMany(targetEntity="Application", mappedBy="server")
+     * @orm\ManyToMany(targetEntity="Application", mappedBy="servers")
      */
     private $applications;
 
@@ -50,7 +50,6 @@ class Server extends \WebCMS\Entity\Entity
      */
     public function addApplication(Application $application)
     {
-        $application->setServer($this);
         $this->applications->add($application);
     }
 
