@@ -18,9 +18,4 @@ class BasePresenter extends \AdminModule\BasePresenter
     {
 	   parent::beforeRender();
     }
-	
-    public function actionDefault($idPage)
-    {
-
-    }
 }
