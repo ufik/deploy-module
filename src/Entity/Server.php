@@ -35,6 +35,21 @@ class Server extends \WebCMS\Entity\Entity
      */
     private $applications;
 
+    public function __construct()
+    {
+        $this->applications = new \Doctrine\Common\Collections\ArrayCollection;
+    }
+
+    /**
+     * Add application instance into collection.
+     * 
+     * @param Application $application Application instance.
+     */
+    public function addApplication(Application $application)
+    {
+        $this->applications->add($application);
+    }
+
     /**
      * Gets the value of name.
      *
@@ -115,19 +130,5 @@ class Server extends \WebCMS\Entity\Entity
     public function getApplications()
     {
         return $this->applications;
-    }
-
-    /**
-     * Sets the value of applications.
-     *
-     * @param mixed $applications the applications
-     *
-     * @return self
-     */
-    public function setApplications($applications)
-    {
-        $this->applications = $applications;
-
-        return $this;
     }
 }

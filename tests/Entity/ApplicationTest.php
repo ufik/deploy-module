@@ -26,6 +26,8 @@ class ApplicationTest extends EntityTestCase
         $this->assertEquals('/var/www/production/', $applications[0]->getServers()[0]->getPath());
         $this->assertEquals('192.168.1.1', $applications[0]->getServers()[0]->getIp());
         $this->assertCount(1, $applications[0]->getServers());
+
+        $this->assertEquals('Test', $applications[0]->getServers()[0]->getApplications()[0]->getName());
     }
 
     private function initApplication()

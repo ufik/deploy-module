@@ -1,6 +1,6 @@
 <?php
 
-namespace WebCMS\DeployModule\Admin\Presenters;
+namespace AdminModule\DeployModule;
 
 /**
  * Description of
