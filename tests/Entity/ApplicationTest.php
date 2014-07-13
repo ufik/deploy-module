@@ -14,10 +14,12 @@ class ApplicationTest extends EntityTestCase
         $this->assertCount(2, $applications);
         $this->assertEquals('Test', $applications[0]->getName());
         $this->assertEquals('testdb', $applications[0]->getDatabase());
+        $this->assertEquals('apache', $applications[0]->getApacheConfig());
         $this->assertEquals('/var/www/test/application/', $applications[0]->getPath());
 
         $this->assertEquals('Test2', $applications[1]->getName());
         $this->assertEquals('test2db', $applications[1]->getDatabase());
+        $this->assertEquals('apache2', $applications[1]->getApacheConfig());
         $this->assertEquals('/var/www/test/application2/', $applications[1]->getPath());
 
         // test server entity
@@ -27,6 +29,14 @@ class ApplicationTest extends EntityTestCase
 
         $server = $this->em->getRepository('WebCMS\DeployModule\Entity\Server')->find(1);
         $applications = $server->getApplications();
+
+        $applications[0]->removeServer($server);
+        $this->em->flush();
+
+        $applications[1]->removeServers();
+
+        $this->assertCount(0, $applications[0]->getServers());
+        $this->assertCount(0, $applications[1]->getServers());
 
         $this->assertCount(2, $applications);
     }
@@ -42,16 +52,15 @@ class ApplicationTest extends EntityTestCase
         $application->setName('Test');
         $application->setPath('/var/www/test/application/');
         $application->setDatabase('testdb');
+        $application->setApacheConfig('apache');
         $application->addServer($server);
         
         $application2 = new \WebCMS\DeployModule\Entity\Application;
         $application2->setName('Test2');
         $application2->setPath('/var/www/test/application2/');
         $application2->setDatabase('test2db');
+        $application2->setApacheConfig('apache2');
         $application2->addServer($server);
-
-        $server->addApplication($application);
-        $server->addApplication($application2);
 
         $this->em->persist($application);
         $this->em->persist($application2);

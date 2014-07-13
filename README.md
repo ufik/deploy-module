@@ -9,3 +9,9 @@ Deploy module
 [![Code Coverage](https://scrutinizer-ci.com/g/ufik/deploy-module/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ufik/deploy-module/?branch=master)
 
 Module for deploying from development server to production servers.
+
+Add this line into your composer.json file.
+
+```
+"webcms2\deploy-module" : "0.1.*@dev"
+```

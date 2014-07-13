@@ -1,22 +1,36 @@
 <?php
 
+/**
+ * This file is part of the Deploy module for webcms2.
+ * Copyright (c) @see LICENSE
+ */
+
 namespace AdminModule\DeployModule;
 
 /**
- * Description of
+ * Servers presenter takes care of managing production servers.
  *
  * @author Tomas Voslar <tomas.voslar@webcook.cz>
  */
 class ServersPresenter extends BasePresenter
 {
     /**
+     * Server instance holder.
      * 
      * @var \WebCMS\DeployModule\Entity\Server
      */
     private $server;
 
+    /**
+     * Server entity repository.
+     * 
+     * @var Doctrine\ORM\EntityRepository
+     */
     private $repository;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function startup()
     {
 	   parent::startup();
@@ -24,17 +38,34 @@ class ServersPresenter extends BasePresenter
        $this->repository = $this->em->getRepository('\WebCMS\DeployModule\Entity\Server');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function beforeRender()
     {
 	   parent::beforeRender();
     }
 
+    /**
+     * Renders default template with datagrid.
+     * 
+     * @param  int    $idPage Id of the page.
+     * 
+     * @return void
+     */
     public function renderDefault($idPage)
     {
     	$this->reloadContent();
     	$this->template->idPage = $idPage;
     }
     
+    /**
+     * Creates datagrid with servers.
+     * 
+     * @param  string $name                   Name of the datagrid.
+     * 
+     * @return Nette\Application\UI\Control   Datagrid object.
+     */
     protected function createComponentServersGrid($name)
     {
         $grid = $this->createGrid($this, $name, '\WebCMS\DeployModule\Entity\Server');
@@ -49,6 +80,14 @@ class ServersPresenter extends BasePresenter
         return $grid;
     }
 
+    /**
+     * Display server form action. 
+     *
+     * @param  int  $id      Application's id.
+     * @param  int  $idPage  Id of the page.
+     * 
+     * @return void
+     */
     public function actionAddServer($id, $idPage)
     {
         if (is_numeric($id)) {
@@ -58,12 +97,24 @@ class ServersPresenter extends BasePresenter
         }
     }
 
+    /**
+     * Render method for server form.
+     * 
+     * @param  int $idPage 
+     * 
+     * @return void
+     */
     public function renderAddServer($idPage)
     {
         $this->reloadContent();
         $this->template->idPage = $idPage;
     }
 
+    /**
+     * Creates server form component.
+     * 
+     * @return  Nette\Application\UI\Control
+     */
     public function createComponentServerForm($form)
     {
         $form = $this->createForm();
@@ -80,6 +131,13 @@ class ServersPresenter extends BasePresenter
         return $form;
     }
 
+    /**
+     * Saves form data into database.
+     * 
+     * @param  Nette\Forms\Form $form Server form.
+     * 
+     * @return void
+     */
     public function serverFormSubmitted($form)
     {
         $values = $form->getValues();
@@ -97,6 +155,13 @@ class ServersPresenter extends BasePresenter
             ));
     }
 
+    /**
+     * Deletes server.
+     * 
+     * @param  int $id Server's id to remove.
+     * 
+     * @return void
+     */
     public function actionDeleteServer($id)
     {
         $this->server = $this->repository->find($id);
