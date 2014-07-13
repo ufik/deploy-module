@@ -33,7 +33,7 @@ class SettingsPresenter extends BasePresenter
     /**
      * Creates settings form component.
      * 
-     * @return  Nette\Application\UI\Control
+     * @return  \Nette\Application\UI\Form
      */
     public function createComponentSettingsForm()
     {
