@@ -60,7 +60,7 @@ class DeployPresenter extends BasePresenter
      * 
      * @param  string $name                   Name of the datagrid.
      * 
-     * @return Nette\Application\UI\Control   Datagrid object.
+     * @return \Grido\Grid   Datagrid object.
      */
     protected function createComponentApplicationsGrid($name)
     {
@@ -117,7 +117,7 @@ class DeployPresenter extends BasePresenter
     /**
      * Creates application form component.
      * 
-     * @return  Nette\Application\UI\Control
+     * @return  \Nette\Application\UI\Form
      */
     public function createComponentApplicationForm()
     {

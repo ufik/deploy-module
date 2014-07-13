@@ -143,7 +143,7 @@ class Server extends \WebCMS\Entity\Entity
     /**
      * Gets the value of applications.
      *
-     * @return mixed
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getApplications()
     {

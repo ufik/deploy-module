@@ -64,7 +64,7 @@ class ServersPresenter extends BasePresenter
      * 
      * @param  string $name                   Name of the datagrid.
      * 
-     * @return Nette\Application\UI\Control   Datagrid object.
+     * @return \Grido\Grid   Datagrid object.
      */
     protected function createComponentServersGrid($name)
     {
@@ -113,7 +113,7 @@ class ServersPresenter extends BasePresenter
     /**
      * Creates server form component.
      * 
-     * @return  Nette\Application\UI\Control
+     * @return  \Nette\Application\UI\Form
      */
     public function createComponentServerForm($form)
     {
