@@ -92,7 +92,7 @@ class DeployPresenter extends BasePresenter
      * 
      * @return void
      */
-    public function actionAddApplication($id, $idPage)
+    public function actionAddApplication($id)
     {
         if (is_numeric($id)) {
             $this->application = $this->repository->find($id);
