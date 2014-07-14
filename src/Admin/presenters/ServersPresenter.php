@@ -115,15 +115,15 @@ class ServersPresenter extends BasePresenter
      * 
      * @return  \Nette\Application\UI\Form
      */
-    public function createComponentServerForm($form)
+    public function createComponentServerForm()
     {
         $form = $this->createForm();
 
-        $form->addText('name', 'Name')->setRequired()->setAttribute('class', 'form-control');
-        $form->addText('path', 'Path')->setRequired()->setAttribute('class', 'form-control');
-        $form->addText('ip', 'Ip address')->setRequired()->setAttribute('class', 'form-control');
+        $form->addText('name', 'Name')->setRequired()->setAttribute('class', array('form-control'));
+        $form->addText('path', 'Path')->setRequired()->setAttribute('class', array('form-control'));
+        $form->addText('ip', 'Ip address')->setRequired()->setAttribute('class', array('form-control'));
 
-        $form->addSubmit('send', 'Save')->setAttribute('class', 'btn btn-success');
+        $form->addSubmit('send', 'Save')->setAttribute('class', array('btn btn-success'));
         $form->onSuccess[] = callback($this, 'serverFormSubmitted');
 
         $form->setDefaults($this->server->toArray());
