@@ -88,7 +88,7 @@ class ServersPresenter extends BasePresenter
      * 
      * @return void
      */
-    public function actionAddServer($id)
+    public function actionAddServer($id, $idPage)
     {
         if (is_numeric($id)) {
             $this->server = $this->repository->find($id);    
