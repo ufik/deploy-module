@@ -39,7 +39,7 @@ class Deploy extends \WebCMS\Module
     protected $presenters = array(
 		array(
 		    'name' => 'Deploy',
-		    'frontend' => false,
+		    'frontend' => true,
 		    'parameters' => false
 		),
         array(
