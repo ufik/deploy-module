@@ -78,6 +78,8 @@ class DeployPresenter extends BasePresenter
             return substr($servers, 0, -2);
         });
 
+        $grid->addActionHref("deployApplication", 'Deploy', 'deployApplication', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => 'btn btn-primary ajax'));
+        $grid->addActionHref("deployDatabase", 'Deploy db', 'deployDatabase', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => 'btn btn-primary ajax'));
         $grid->addActionHref("addApplication", 'Edit', 'addApplication', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => 'btn btn-primary ajax'));
         $grid->addActionHref("deleteApplication", 'Delete', 'deleteApplication', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => 'btn btn-primary btn-danger'));
         
@@ -210,6 +212,61 @@ TransferLog /var/log/appname.log
         $this->em->flush();
 
         $this->flashMessage('Application has been removed', 'success');
+        $this->forward('default', array(
+                'idPage' => $this->actualPage->getId()
+            ));
+    }
+
+    /**
+     * 
+     * 
+     * @param  [type] $id [description]
+     * 
+     * @return [type]     [description]
+     */
+    public function actionDeployApplication($id, $idPage)
+    {
+        $application = $this->repository->find($id);
+
+        $deployScript = $this->settings->get('Deploy script', 'deployModule')->getValue();
+
+        foreach($application->getServers() as $server) {
+            $commandString = sprintf($deployScript,
+                $application->getPath(),
+                $server->getPath() . $application->getName()
+            );
+
+            $output = shell_exec($commandString);
+            $this->flashMessage($server->getName() . ' ' . $output, 'info');
+        }
+
+        $this->flashMessage('Application has been deployed.', 'success');
+        $this->forward('default', array(
+                'idPage' => $this->actualPage->getId()
+            ));
+    }
+
+    /**
+     * 
+     * 
+     * @param  [type] $id [description]
+     * 
+     * @return [type]     [description]
+     */
+    public function actionDeployDatabase($id, $idPage)
+    {
+        $application = $this->repository->find($id);
+
+        $deployScript = $this->settings->get('Deploy database script', 'deployModule')->getValue();
+
+        foreach($application->getServers() as $server) {
+            $commandString = sprintf($deployScript, $application->getDatabase());
+            
+            $output = shell_exec($commandString);
+            $this->flashMessage($server->getName() . ' ' . $output, 'info');
+        }
+
+        $this->flashMessage('Database has been deployed on all servers.', 'success');
         $this->forward('default', array(
                 'idPage' => $this->actualPage->getId()
             ));
