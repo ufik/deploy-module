@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * This file is part of the Deploy module for webcms2.
+ * Copyright (c) @see LICENSE
+ */
+
 namespace WebCMS\DeployModule\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of Application entity.
+ * Application entity holds information about deployed app.
  * 
  * @ORM\Entity
  * @author Tomáš Voslař <tomas.voslar at webcook.cz>
@@ -13,29 +18,52 @@ use Doctrine\ORM\Mapping as ORM;
 class Application extends \WebCMS\Entity\Entity
 {
     /**
-     * @ORM\Column(unique=true)
+     * Name of the application.
+     * 
+     * @ORM\Column(name="`name`",unique=true)
      * @var string
      */
     private $name;
 
     /**
+     * Application's path.
+     * 
      * @ORM\Column()
      * @var string
      */
-    private $pathName;
+    private $path;
 
     /**
-     * @ORM\Column()
+     * Name of the application database.
+     * 
+     * @ORM\Column(name="`database`")
      * @var string
      */
-    private $databaseName;
+    private $database;
 
     /**
-     * @orm\ManyToOne(targetEntity="Server", inversedBy="applications")
-     * @orm\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
-     * @var Server
+     * Prouction servers associated to application.
+     * 
+     * @orm\ManyToMany(targetEntity="Server", inversedBy="servers")
+     * @var \Doctrine\Common\Collections\ArrayCollection<Server>
      */
-    private $server;
+    private $servers;
+
+    /**
+     * Apache config for virtual host.
+     * 
+     * @ORM\Column(type="text")
+     * @var text
+     */
+    private $apacheConfig;
+
+    /**
+     * Constructs entity class with init of servers array collection.
+     */
+    public function __construct()
+    {
+        $this->servers = new \Doctrine\Common\Collections\ArrayCollection;
+    }
 
     /**
      * Gets the value of name.
@@ -62,49 +90,49 @@ class Application extends \WebCMS\Entity\Entity
     }
 
     /**
-     * Gets the value of pathName.
+     * Gets the value of Path.
      *
      * @return string
      */
-    public function getPathName()
+    public function getPath()
     {
-        return $this->pathName;
+        return $this->path;
     }
 
     /**
-     * Sets the value of pathName.
+     * Sets the value of Path.
      *
-     * @param string $pathName the path name
+     * @param string $path the path name
      *
      * @return self
      */
-    public function setPathName($pathName)
+    public function setPath($path)
     {
-        $this->pathName = $pathName;
+        $this->path = $path;
 
         return $this;
     }
 
     /**
-     * Gets the value of databaseName.
+     * Gets the value of Database.
      *
      * @return string
      */
-    public function getDatabaseName()
+    public function getDatabase()
     {
-        return $this->databaseName;
+        return $this->database;
     }
 
     /**
-     * Sets the value of databaseName.
+     * Sets the value of Database.
      *
-     * @param string $databaseName the database name
+     * @param string $database the database name
      *
      * @return self
      */
-    public function setDatabaseName($databaseName)
+    public function setDatabase($database)
     {
-        $this->databaseName = $databaseName;
+        $this->database = $database;
 
         return $this;
     }
@@ -112,11 +140,11 @@ class Application extends \WebCMS\Entity\Entity
     /**
      * Gets the value of servers.
      *
-     * @return Server
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function getServer()
+    public function getServers()
     {
-        return $this->server;
+        return $this->servers;
     }
 
 
@@ -125,11 +153,56 @@ class Application extends \WebCMS\Entity\Entity
      *
      * @param Server $server the server
      *
-     * @return Server
+     * @return void
      */
-    public function setServer(Server $server)
+    public function addServer(Server $server)
     {
-        $this->server = $server;
+        $server->addApplication($this);
+        $this->servers->add($server);
+    }
+
+    /**
+     * Removes single element from collection.
+     * 
+     * @param  Server $server serve to remove
+     * 
+     * @return void
+     */
+    public function removeServer(Server $server)
+    {
+        $this->servers->removeElement($server);
+    }
+
+    /**
+     * Clears servers collection.
+     * 
+     * @return void
+     */
+    public function removeServers()
+    {
+        $this->servers->clear();
+    }
+
+    /**
+     * Gets the value of apacheConfig.
+     *
+     * @return text
+     */
+    public function getApacheConfig()
+    {
+        return $this->apacheConfig;
+    }
+
+    /**
+     * Sets the value of apacheConfig.
+     *
+     * @param text $apacheConfig the apache config
+     *
+     * @return self
+     */
+    public function setApacheConfig($apacheConfig)
+    {
+        $this->apacheConfig = $apacheConfig;
 
         return $this;
     }

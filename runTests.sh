@@ -3,6 +3,7 @@
 if [ ! -d 'vendor/webcms2/webcms2/tests/temp' ]; then
 
 mkdir vendor/webcms2/webcms2/tests/temp
+mkdir vendor/webcms2/webcms2/tests/temp/sessions
 mkdir vendor/webcms2/webcms2/tests/log
 
 fi

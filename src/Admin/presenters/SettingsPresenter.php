@@ -1,23 +1,40 @@
 <?php
 
+/**
+ * This file is part of the Deploy module for webcms2.
+ * Copyright (c) @see LICENSE
+ */
+
 namespace AdminModule\DeployModule;
 
 /**
- * Description of
+ * Settings presenter of the deploy module.
+ * 
  * @author Tomáš Voslař <tomas.voslar at webcook.cz>
  */
 class SettingsPresenter extends BasePresenter
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function startup() 
     {
 		parent::startup();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function beforeRender() 
     {
 		parent::beforeRender();	
     }
 	
+    /**
+     * Creates settings form component.
+     * 
+     * @return  \Nette\Application\UI\Form
+     */
     public function createComponentSettingsForm()
     {
 		$settings = array();
@@ -28,6 +45,13 @@ class SettingsPresenter extends BasePresenter
 		return $this->createSettingsForm($settings);
     }
 	
+    /**
+     * Renders default template.
+     * 
+     * @param  int $idPage Id of the page.
+     * 
+     * @return void
+     */
     public function renderDefault($idPage)
     {
 		$this->reloadContent();

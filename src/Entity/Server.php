@@ -1,11 +1,18 @@
 <?php
 
+/**
+ * This file is part of the Deploy module for webcms2.
+ * Copyright (c) @see LICENSE
+ */
+
 namespace WebCMS\DeployModule\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of Server entity.
+ * Server holds information about production server.
+ * 
+ * From this entity information will be deployed application to the production server.
  * 
  * @ORM\Entity
  * @author Tomáš Voslař <tomas.voslar at webcook.cz>
@@ -13,30 +20,38 @@ use Doctrine\ORM\Mapping as ORM;
 class Server extends \WebCMS\Entity\Entity
 {
     /**
+     * Server's name.
+     * 
      * @ORM\Column(unique=true)
      * @var string
      */
     private $name;
 
     /**
+     * Server's ip address.
+     * 
      * @ORM\Column()
      * @var string
      */
     private $ip;
 
     /**
+     * Path to the production environment.
+     * 
      * @ORM\Column()
      * @var string
      */
     private $path;
 
     /**
-     * @orm\OneToMany(targetEntity="Application", mappedBy="server")
+     * Applications associated with the production server.
+     * 
+     * @orm\ManyToMany(targetEntity="Application", mappedBy="servers")
      */
     private $applications;
 
     /**
-     * [__construct description]
+     * Initialize applications array collection.
      */
     public function __construct()
     {
@@ -50,7 +65,6 @@ class Server extends \WebCMS\Entity\Entity
      */
     public function addApplication(Application $application)
     {
-        $application->setServer($this);
         $this->applications->add($application);
     }
 
@@ -129,7 +143,7 @@ class Server extends \WebCMS\Entity\Entity
     /**
      * Gets the value of applications.
      *
-     * @return mixed
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getApplications()
     {

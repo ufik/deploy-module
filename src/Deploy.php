@@ -1,68 +1,55 @@
 <?php
 
+/**
+ * This file is part of the Deploy module for webcms2.
+ * Copyright (c) @see LICENSE
+ */
+
 namespace WebCMS\DeployModule;
 
 /**
- * Description of deploy
+ * Deploy module for WebCMS2 system.
+ * 
+ * Deploys applications to the production servers. One application can be assigned
+ * to many production servers and vice versa.
  *
  * @author Tomas Voslar <tomas.voslar@webcook.cz>
  */
 class Deploy extends \WebCMS\Module
 {
 	/**
-	 * [$name description]
+     * Name of the module.
+     * 
 	 * @var string
 	 */
     protected $name = 'Deploy';
     
     /**
-     * [$author description]
+     * Author's name.
+     * 
      * @var string
      */
     protected $author = 'Tomas Voslar';
     
     /**
-     * [$presenters description]
+     * Module presenters and their settings.
+     * 
      * @var array
      */
     protected $presenters = array(
 		array(
 		    'name' => 'Deploy',
-		    'frontend' => TRUE,
-		    'parameters' => FALSE
+		    'frontend' => true,
+		    'parameters' => false
 		),
+        array(
+            'name' => 'Servers',
+            'frontend' => false,
+            'parameters' => false
+        ),
 		array(
 		    'name' => 'Settings',
-		    'frontend' => FALSE
+		    'frontend' => false
 		)
     );
-
-    /**
-     * [$params description]
-     * @var array
-     */
-    protected $params = array();
-
-    /**
-     * [$cloneable description]
-     * @var boolean
-     */
-    protected $cloneable = false;
-
-    /**
-     * [$translatable description]
-     * @var boolean
-     */
-    protected $translatable = false;
-
-    /**
-     * [$searchable description]
-     * @var boolean
-     */
-    protected $searchable = false;
-
-    public function __construct() 
-    {
-	
-    }
 }
