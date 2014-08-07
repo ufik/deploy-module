@@ -11,7 +11,6 @@ if [ "$1" = "" ]; then
     exit 0
 fi
 
-rm -r report
 phpunit --coverage-clover=coverage.clover tests/
 wget https://scrutinizer-ci.com/ocular.phar
 php ocular.phar code-coverage:upload --format=php-clover coverage.clover

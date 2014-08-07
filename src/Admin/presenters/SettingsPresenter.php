@@ -22,6 +22,9 @@ class SettingsPresenter extends BasePresenter
     {
 		$settings = array();
 
+        $settings[] = $this->settings->get('Deploy script', 'deployModule', 'text', array());
+        $settings[] = $this->settings->get('Deploy database script', 'deployModule', 'text', array());
+
 		return $this->createSettingsForm($settings);
     }
 	
