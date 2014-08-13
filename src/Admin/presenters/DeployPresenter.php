@@ -77,6 +77,21 @@ class DeployPresenter extends BasePresenter
 
             return substr($servers, 0, -2);
         });
+        $grid->addColumnText('applications', 'System version')->setCustomRender(function($item) {
+		
+              $installedPath = $item->getPath() . 'libs/composer/installed.json';
+
+              if (file_exists($installedPath)) {
+                  $installed = file_get_contents($item->getPath() . 'libs/composer/installed.json');
+                  $installed = json_decode($installed);
+                  foreach ($installed as $package) {
+                      if ($package->name == 'webcms2/webcms2') {
+                          return $package->version;
+                      }
+                 }
+             }
+             return 'No system detected.';
+        });
 
         $grid->addActionHref("deployApplication", 'Deploy', 'deployApplication', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => 'btn btn-primary ajax'));
         $grid->addActionHref("deployDatabase", 'Deploy db', 'deployDatabase', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => 'btn btn-primary ajax'));
