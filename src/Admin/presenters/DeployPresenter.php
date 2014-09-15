@@ -249,7 +249,7 @@ TransferLog /var/log/appname.log
             $commandString = sprintf($deployScript,
                 $application->getPath(),
                 $server->getPath() . $application->getName(),
-                $server->getName()
+                $server->getIp()
             );
 
             $output = shell_exec($commandString);
@@ -278,7 +278,7 @@ TransferLog /var/log/appname.log
         foreach($application->getServers() as $server) {
             $commandString = sprintf($deployScript, 
             	$application->getDatabase(),
-            	$server->getName()
+            	$server->getIp()
             );
             
             $output = shell_exec($commandString);
