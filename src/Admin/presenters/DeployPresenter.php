@@ -248,7 +248,8 @@ TransferLog /var/log/appname.log
         foreach($application->getServers() as $server) {
             $commandString = sprintf($deployScript,
                 $application->getPath(),
-                $server->getPath() . $application->getName()
+                $server->getPath() . $application->getName(),
+                $server->getName()
             );
 
             $output = shell_exec($commandString);
@@ -275,7 +276,10 @@ TransferLog /var/log/appname.log
         $deployScript = $this->settings->get('Deploy database script', 'deployModule')->getValue();
 
         foreach($application->getServers() as $server) {
-            $commandString = sprintf($deployScript, $application->getDatabase());
+            $commandString = sprintf($deployScript, 
+            	$application->getDatabase(),
+            	$server->getName()
+            );
             
             $output = shell_exec($commandString);
             $this->flashMessage($server->getName() . ' ' . $output, 'info');
