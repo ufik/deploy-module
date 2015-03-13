@@ -1,8 +1,8 @@
 {block content}
-
-	{include ../tabs.latte active => 'deploy'}
-
-	<h1>{_'Application form'}</h1>
+	<div class="page-heading">
+		<h1>{_'Application form'}</h1>
+		{include ../tabs.latte active => 'deploy'}
+	</div>
 
 	{control applicationForm}
 

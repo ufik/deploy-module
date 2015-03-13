@@ -1,9 +1,10 @@
 {block content}
 	
-	{include ../tabs.latte active => 'servers'}
+	<div class="page-heading">	
+		<h1>{$actualPage->getTitle()} - servers</h1>
+		{include ../tabs.latte active => 'servers'}
+	</div>	
 
-	<h1>{$actualPage->getTitle()} - servers</h1>
-	
 	<a class="btn btn-primary ajax" n:href="addServer idPage => $actualPage->getId()">{_'Add server'}</a>
 
 	<br /><br />
