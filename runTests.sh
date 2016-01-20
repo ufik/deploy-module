@@ -12,8 +12,8 @@ if [ "$1" = "" ]; then
     exit 0
 fi
 
-phpunit --coverage-clover=coverage.clover tests/
+phpunit --coverage-clover=coverage.clover tests/;result=$?
 wget https://scrutinizer-ci.com/ocular.phar
 php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
-exit 0
+exit $result
